@@ -52,7 +52,6 @@ export default function Footer() {
   const handleSubscribe = (e: FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    // TODO: connect to your newsletter provider
     console.log("Newsletter signup:", email);
     setSubscribed(true);
     setTimeout(() => {
@@ -63,7 +62,7 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-navy text-cream overflow-hidden">
-      {/* ════════ DECORATIVE BACKGROUND ════════ */}
+      {/* Decorative background */}
       <div
         className="absolute inset-0 opacity-25 pointer-events-none"
         style={{
@@ -72,13 +71,10 @@ export default function Footer() {
           backgroundSize: "26px 26px",
         }}
       />
-      {/* Soft gold glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-32 bg-gold/10 blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-gold/5 blur-3xl pointer-events-none" />
 
-      {/* ════════════════════════════════════════════════════════
-            TOP CTA STRIP — final call to action
-          ════════════════════════════════════════════════════════ */}
+      {/* Top CTA strip */}
       <div className="relative border-b border-cream/10">
         <Container>
           <motion.div
@@ -89,7 +85,6 @@ export default function Footer() {
             className="py-14 md:py-20"
           >
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12">
-              {/* Left: massive heading */}
               <div className="flex-1">
                 <div className="inline-flex items-center gap-2 mb-5 md:mb-6">
                   <span className="w-6 h-px bg-gold" />
@@ -110,7 +105,6 @@ export default function Footer() {
                 </h2>
               </div>
 
-              {/* Right: CTA button cluster */}
               <div className="flex flex-col gap-3 lg:items-end">
                 <Link
                   href="#contact"
@@ -141,9 +135,7 @@ export default function Footer() {
         </Container>
       </div>
 
-      {/* ════════════════════════════════════════════════════════
-            MAIN GRID — newsletter + 3 link columns
-          ════════════════════════════════════════════════════════ */}
+      {/* Main grid */}
       <div className="relative">
         <Container>
           <motion.div
@@ -153,13 +145,11 @@ export default function Footer() {
             transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
             className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 py-14 md:py-20"
           >
-            {/* ─── Newsletter column (5/12) ─── */}
+            {/* Newsletter column */}
             <div className="lg:col-span-5">
               <div className="relative bg-cream/[0.04] border border-cream/10 rounded-3xl p-6 md:p-7 backdrop-blur-sm overflow-hidden">
-                {/* Corner decoration */}
                 <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-gold/15 blur-2xl pointer-events-none" />
 
-                {/* Header */}
                 <div className="flex items-start justify-between mb-4 relative">
                   <div>
                     <div className="inline-flex items-center gap-2 mb-3">
@@ -186,7 +176,6 @@ export default function Footer() {
                   needle. No fluff, ever.
                 </p>
 
-                {/* Form */}
                 {subscribed ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -227,7 +216,6 @@ export default function Footer() {
                   </form>
                 )}
 
-                {/* Trust microcopy */}
                 <p className="text-[10.5px] text-cream/40 mt-3 leading-relaxed">
                   Joined by 2,400+ founders & marketers. Unsubscribe in one
                   click — no judgement.
@@ -235,15 +223,11 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* ─── Link columns (7/12) ─── */}
+            {/* Link columns */}
             <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8">
-              {/* Navigation */}
               <FooterColumn label="// Navigate //" links={navLinks} />
-
-              {/* Resources */}
               <FooterColumn label="// Resources //" links={resourceLinks} />
 
-              {/* Socials */}
               <div>
                 <h3 className="text-[10px] font-bold text-cream/40 uppercase tracking-[0.2em] mb-5">
                   // Social //
@@ -272,7 +256,6 @@ export default function Footer() {
                   ))}
                 </ul>
 
-                {/* Mini availability widget */}
                 <div className="mt-7 inline-flex items-center gap-2 bg-cream/5 border border-cream/10 rounded-full pl-2 pr-3.5 py-1.5">
                   <span className="relative flex w-1.5 h-1.5 ml-0.5">
                     <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
@@ -288,11 +271,8 @@ export default function Footer() {
         </Container>
       </div>
 
-      {/* ════════════════════════════════════════════════════════
-            MASSIVE WORDMARK
-          ════════════════════════════════════════════════════════ */}
+      {/* Massive wordmark */}
       <div className="relative overflow-hidden">
-        {/* Hairline rule */}
         <div className="border-t border-cream/10" />
 
         <motion.div
@@ -317,27 +297,20 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Subtle gradient overlay so the wordmark feels grounded */}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-navy to-transparent pointer-events-none" />
         </motion.div>
       </div>
 
-      {/* ════════════════════════════════════════════════════════
-            BOTTOM STRIP — copyright, location, version
-          ════════════════════════════════════════════════════════ */}
+      {/* Bottom strip */}
       <div className="relative border-t border-cream/10">
         <Container>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 py-5 md:py-6 text-[11.5px]">
-            {/* Left: copyright */}
             <div className="flex items-center gap-3 text-cream/50 flex-wrap">
-              <span>
-                © {new Date().getFullYear()} MedClap.
-              </span>
+              <span>© {new Date().getFullYear()} MedClap.</span>
               <span className="hidden md:inline text-cream/20">|</span>
               <span className="italic">Bringing your vision to life.</span>
             </div>
 
-            {/* Right: meta */}
             <div className="flex items-center gap-4 text-cream/50 flex-wrap">
               <span className="inline-flex items-center gap-1.5">
                 Made with{" "}
@@ -360,15 +333,17 @@ export default function Footer() {
 }
 
 /* ============================================================
-   FOOTER LINK COLUMN (reusable for Nav + Resources)
+   FOOTER LINK COLUMN
    ============================================================ */
+
+type FooterLink = { label: string; href: string };
 
 function FooterColumn({
   label,
   links,
 }: {
   label: string;
-  links: { label: string; href: string }[];
+  links: FooterLink[];
 }) {
   return (
     <div>
@@ -376,28 +351,45 @@ function FooterColumn({
         {label}
       </h3>
       <ul className="space-y-3">
-        {links.map(({ label, href }) => {
-          const isHash = href.startsWith("#");
-          const LinkComp = isHash ? "a" : Link;
-          return (
-            <li key={label}>
-              <LinkComp
-                href={href}
-                className="group inline-flex items-center gap-1.5 text-cream hover:text-gold transition-colors text-[14.5px] font-bold"
-              >
-                <span className="relative">
-                  {label}
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                </span>
-                <ArrowUpRight
-                  className="w-3.5 h-3.5 text-cream/0 group-hover:text-gold -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
-                  strokeWidth={2.5}
-                />
-              </LinkComp>
-            </li>
-          );
-        })}
+        {links.map((link) => (
+          <li key={link.label}>
+            <FooterLinkItem link={link} />
+          </li>
+        ))}
       </ul>
     </div>
+  );
+}
+
+function FooterLinkItem({ link }: { link: FooterLink }) {
+  const isHash = link.href.startsWith("#");
+  const linkClassName =
+    "group inline-flex items-center gap-1.5 text-cream hover:text-gold transition-colors text-[14.5px] font-bold";
+
+  const inner = (
+    <>
+      <span className="relative">
+        {link.label}
+        <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+      </span>
+      <ArrowUpRight
+        className="w-3.5 h-3.5 text-cream/0 group-hover:text-gold -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
+        strokeWidth={2.5}
+      />
+    </>
+  );
+
+  if (isHash) {
+    return (
+      <a href={link.href} className={linkClassName}>
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={link.href} className={linkClassName}>
+      {inner}
+    </Link>
   );
 }
