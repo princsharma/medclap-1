@@ -38,7 +38,7 @@ const navLinks = [
 
 const socialLinks = [
  { label: "LinkedIn", href: "https://www.linkedin.com/company/medclap", Icon: Linkedin },
-  { label: "YouTube / X", href: "https://www.youtube.com/@MedClap", Icon: YoutubeIcon },
+  { label: "YouTube", href: "https://www.youtube.com/@MedClap", Icon: YoutubeIcon },
   { label: "Instagram", href: "https://www.instagram.com/lifeatmedclap", Icon: Instagram },
 ];
 

@@ -309,7 +309,7 @@ export default function Header() {
                             />
                           </span>
                           <span className="font-display text-base md:text-lg font-extrabold tracking-tight">
-                            +91 999 661 9432
+                           +1 (201) 632-5548
                           </span>
                         </a>
                       </div>

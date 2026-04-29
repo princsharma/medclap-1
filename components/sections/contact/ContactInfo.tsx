@@ -75,7 +75,7 @@ export default function ContactInfo() {
         </div>
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-navy text-gold flex items-center justify-center font-display font-extrabold text-lg flex-shrink-0">
-            PS
+            DS
           </div>
           <div className="min-w-0">
             <div className="font-display text-[15px] font-extrabold text-navy leading-tight">
