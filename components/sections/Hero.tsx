@@ -293,8 +293,8 @@ export default function Hero() {
             </motion.div>
 
             {/* Floating: Growth chart */}
-            <motion.div
-              className="absolute top-6 right-6 bg-cream rounded-2xl p-3.5 shadow-xl border border-divider-soft"
+            {/* <motion.div
+              className="absolute top-6 right-6 bg-cream z-[9999] rounded-2xl p-3.5 shadow-xl border border-divider-soft"
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -319,11 +319,11 @@ export default function Hero() {
                   />
                 ))}
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Floating: Partner badge */}
             <motion.div
-              className="absolute bottom-24 left-6 bg-cream rounded-2xl p-2.5 shadow-xl flex items-center gap-2.5 border border-divider-soft"
+              className="absolute bottom-4 left-6 bg-cream rounded-2xl p-2.5 shadow-xl flex items-center gap-2.5 border border-divider-soft"
               animate={{ y: [0, -6, 0] }}
               transition={{
                 duration: 4.5,

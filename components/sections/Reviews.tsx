@@ -1,19 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Star, ArrowUpRight, MessageSquare } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { Star, ArrowUpRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 /* ============================================================
-   TESTIMONIAL DATA
-   Each quote is tied to a brand from the Work section
-   so the page reads as one continuous story.
+   DATA
    ============================================================ */
 
 type Avatar = { bg: string; color: string; initials: string };
@@ -61,10 +53,6 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-/* ============================================================
-   AVATAR STACK DATA (for the left rating card)
-   ============================================================ */
-
 const stackAvatars: Avatar[] = [
   { bg: "#F4B62E", color: "#1A2A5E", initials: "SC" },
   { bg: "#1A2A5E", color: "#F4B62E", initials: "MC" },
@@ -73,64 +61,66 @@ const stackAvatars: Avatar[] = [
 ];
 
 /* ============================================================
+   ANIMATION VARIANTS
+   Defined once, reused across the section.
+   ============================================================ */
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.2, 0.8, 0.2, 1] },
+  },
+};
+
+const fadeRight: Variants = {
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.9, ease: [0.2, 0.8, 0.2, 1] },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
+const staggerCards: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+  },
+};
+
+/* ============================================================
    MAIN COMPONENT
    ============================================================ */
 
 export default function Reviews() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from([".reviews-eyebrow", ".reviews-title", ".reviews-intro"], {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".reviews-header",
-          start: "top 80%",
-        },
-      });
-
-      gsap.from(".reviews-stats-card", {
-        x: -40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".reviews-grid",
-          start: "top 80%",
-        },
-      });
-
-      gsap.from(".testimonial-card", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".reviews-grid",
-          start: "top 80%",
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="reviews"
-      className="relative py-20 md:py-28 bg-cream"
+      className="relative py-20 md:py-28 bg-cream overflow-hidden"
     >
       <Container>
         {/* ════════ HEADER ════════ */}
-        <div className="reviews-header grid grid-cols-1 md:grid-cols-12 gap-6 mb-12 md:mb-16 items-end">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12 md:mb-16 items-end"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={staggerContainer}
+        >
           <div className="md:col-span-8">
-            <div className="reviews-eyebrow inline-flex items-center gap-2 bg-navy text-cream rounded-full pl-2 pr-3.5 py-1.5 mb-6">
+            <motion.div
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 bg-navy text-cream rounded-full pl-2 pr-3.5 py-1.5 mb-6"
+            >
               <span className="w-5 h-5 rounded-full bg-gold flex items-center justify-center">
                 <Star
                   className="w-2.5 h-2.5 text-navy fill-navy"
@@ -140,29 +130,39 @@ export default function Reviews() {
               <span className="text-[11px] font-bold uppercase tracking-[0.18em]">
                 Reviews
               </span>
-            </div>
+            </motion.div>
 
-            <h2
-              className="reviews-title font-display font-extrabold text-navy tracking-tight leading-[0.95]"
+            <motion.h2
+              variants={fadeUp}
+              className="font-display font-extrabold text-navy tracking-tight leading-[0.95]"
               style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
             >
               Success{" "}
               <span className="font-serif italic font-normal text-gold-deep">
                 stories.
               </span>
-            </h2>
+            </motion.h2>
           </div>
 
-          <p className="reviews-intro md:col-span-4 text-sm md:text-[15px] text-ink-soft leading-relaxed md:text-right">
+          <motion.p
+            variants={fadeUp}
+            className="md:col-span-4 text-sm md:text-[15px] text-ink-soft leading-relaxed md:text-right"
+          >
             Discover how our growth-focused approach helps ambitious brands
             scale smarter and faster than the competition.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* ════════ MAIN GRID ════════ */}
-        <div className="reviews-grid grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
           {/* ─── LEFT: STATS CARD ─── */}
-          <div className="reviews-stats-card lg:col-span-4 bg-navy rounded-3xl p-7 md:p-8 text-cream relative overflow-hidden flex flex-col justify-between min-h-[460px] lg:min-h-0">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={fadeRight}
+            className="lg:col-span-4 bg-navy rounded-3xl p-7 md:p-8 text-cream relative overflow-hidden flex flex-col justify-between min-h-[460px] lg:min-h-0"
+          >
             {/* Dot pattern bg */}
             <div
               className="absolute inset-0 opacity-25"
@@ -200,25 +200,35 @@ export default function Reviews() {
 
             {/* Bottom: trust block + button */}
             <div className="relative mt-8">
-              {/* Avatar stack */}
-              <div className="flex -space-x-3 mb-4 group/stack">
+              {/* Avatar stack — spreads slightly on hover via CSS */}
+              <motion.div
+                className="flex -space-x-3 mb-4"
+                whileHover="spread"
+              >
                 {stackAvatars.map((a, i) => (
-                  <div
+                  <motion.div
                     key={i}
-                    className="w-10 h-10 rounded-full border-2 border-navy flex items-center justify-center text-[12px] font-display font-extrabold transition-all duration-500 group-hover/stack:-space-x-2"
+                    variants={{
+                      spread: { x: i * 4 },
+                    }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="w-10 h-10 rounded-full border-2 border-navy flex items-center justify-center text-[12px] font-display font-extrabold"
                     style={{
                       background: a.bg,
                       color: a.color,
-                      transitionDelay: `${i * 30}ms`,
                     }}
                   >
                     {a.initials}
-                  </div>
+                  </motion.div>
                 ))}
-                <div className="w-10 h-10 rounded-full border-2 border-navy bg-cream/10 backdrop-blur-sm flex items-center justify-center text-[10px] font-bold text-gold">
+                <motion.div
+                  variants={{ spread: { x: 16 } }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="w-10 h-10 rounded-full border-2 border-navy bg-cream/10 backdrop-blur-sm flex items-center justify-center text-[10px] font-bold text-gold"
+                >
                   +136
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
 
               {/* Trust copy */}
               <div className="font-display text-lg font-extrabold text-cream tracking-tight leading-tight mb-1.5">
@@ -242,14 +252,23 @@ export default function Reviews() {
                 </span>
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* ─── RIGHT: TESTIMONIAL GRID 2×2 ─── */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerCards}
+            className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5"
+          >
             {testimonials.map((t, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="testimonial-card group bg-cream-warm border border-divider-soft rounded-3xl p-6 md:p-7 flex flex-col transition-all duration-500 hover:border-divider hover:-translate-y-1 hover:shadow-md relative"
+                variants={fadeUp}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="group bg-cream-warm border border-divider-soft rounded-3xl p-6 md:p-7 flex flex-col hover:border-divider hover:shadow-md relative transition-[border-color,box-shadow] duration-500"
               >
                 {/* Rating */}
                 <div className="flex items-center gap-1.5 mb-4">
@@ -299,11 +318,11 @@ export default function Reviews() {
                   </div>
                 </div>
 
-                {/* Subtle hover accent line at bottom */}
-                <div className="absolute bottom-0 left-7 right-7 h-px bg-gold transition-all duration-500 ease-out scale-x-0 group-hover:scale-x-100 origin-left" />
-              </div>
+                {/* Hover accent line */}
+                <div className="absolute bottom-0 left-7 right-7 h-px bg-gold transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100 origin-left" />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>
