@@ -229,9 +229,9 @@ export default function Footer() {
               <FooterColumn label="// Resources //" links={resourceLinks} />
 
               <div>
-                <h3 className="text-[10px] font-bold text-cream/40 uppercase tracking-[0.2em] mb-5">
-                  // Social //
-                </h3>
+              <h3 className="text-[10px] font-bold text-cream/40 uppercase tracking-[0.2em] mb-5">
+  {"// Social //"}
+</h3>
                 <ul className="space-y-3">
                   {socialLinks.map(({ label, href, Icon }) => (
                     <li key={label}>
