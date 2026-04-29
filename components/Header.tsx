@@ -284,7 +284,7 @@ export default function Header() {
                       </h3>
                       <div className="space-y-3">
                         <a
-                          href="mailto:hello@medclap.com"
+                          href="mailto:deep@medclap.com"
                           className="group flex items-center gap-3 hover:text-gold transition-colors"
                         >
                           <span className="w-9 h-9 rounded-lg bg-cream/10 group-hover:bg-gold/20 border border-cream/10 flex items-center justify-center transition-colors flex-shrink-0">
@@ -294,7 +294,7 @@ export default function Header() {
                             />
                           </span>
                           <span className="font-display text-base md:text-lg font-extrabold tracking-tight">
-                            hello@medclap.com
+                            deep@medclap.com
                           </span>
                         </a>
                         <a

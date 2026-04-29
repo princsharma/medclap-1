@@ -91,10 +91,10 @@ export default function ContactInfo() {
       {/* Quick contact methods */}
       <motion.div variants={fadeUp} className="space-y-3 mb-6">
         <ContactLink
-          href="mailto:hello@medclap.com"
+          href="mailto:deep@medclap.com"
           icon={<Mail className="w-5 h-5 text-gold" strokeWidth={2.25} />}
           label="Email"
-          value="hello@medclap.com"
+          value="deep@medclap.com"
         />
         <ContactLink
           href="tel:+919996619432"

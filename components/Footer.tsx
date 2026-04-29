@@ -121,12 +121,12 @@ export default function Footer() {
                   </span>
                 </Link>
                 <a
-                  href="mailto:hello@medclap.com"
+                  href="mailto:deep@medclap.com"
                   className="group inline-flex items-center gap-2 text-cream/70 hover:text-gold transition-colors text-[13.5px]"
                 >
                   <Mail className="w-3.5 h-3.5" strokeWidth={2.25} />
                   <span className="border-b border-transparent group-hover:border-gold transition-colors">
-                    or just say hi at hello@medclap.com
+                    or just say hi at deep@medclap.com
                   </span>
                 </a>
               </div>
