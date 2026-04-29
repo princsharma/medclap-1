@@ -196,9 +196,9 @@ export default function Founders() {
                     {String(activeIndex + 1).padStart(2, "0")}
                   </span>
                   <span className="w-6 h-px bg-divider" />
-                  <span>
-                    {String(owners.length).padStart(2, "0")} · Co-Founder
-                  </span>
+                  {/* <span>
+                    {String(owners.length).padStart(2, "0")} Founder · Co-Founder
+                  </span> */}
                 </motion.div>
 
                 <motion.h3
@@ -321,7 +321,7 @@ export default function Founders() {
                           : "text-navy"
                       }`}
                     >
-                      Co-Founder
+                      Founder
                     </span>
                   </div>
 
