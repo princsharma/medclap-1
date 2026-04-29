@@ -121,25 +121,9 @@ export default function Header() {
               }`}
               aria-label="MedClap home"
             >
-              <div
-                className={`relative w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden transition-colors duration-500 ${
-                  isOpen ? "bg-cream" : "bg-navy"
-                }`}
-              >
-                <span
-                  className={`absolute w-[3px] h-5 rotate-[35deg] top-1.5 left-3.5 transition-colors duration-500 ${
-                    isOpen ? "bg-navy" : "bg-gold"
-                  }`}
-                />
-                <span
-                  className={`absolute w-5 h-[3px] rotate-[35deg] top-3.5 left-1.5 transition-colors duration-500 ${
-                    isOpen ? "bg-navy" : "bg-gold"
-                  }`}
-                />
-              </div>
-              <span className="font-display text-xl font-extrabold tracking-tight">
-                MedClap
-              </span>
+            <img width={80}
+    height={40}
+     src="./images/main-logo.png" alt="" />
             </Link>
 
             {/* Menu / Close Button */}
