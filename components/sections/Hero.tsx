@@ -98,9 +98,10 @@ export default function Hero() {
 
   return (
     <section
-      ref={heroRef}
-      className="relative pt-20 md:pt-28 pb-16 md:pb-24 overflow-hidden"
-    >
+  ref={heroRef}
+  id="home"
+  className="relative min-h-screen pt-20 md:pt-28 overflow-hidden bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(244,182,46,0.2),transparent_65%),radial-gradient(circle_at_85%_40%,rgba(244,182,46,0.12),transparent_50%),linear-gradient(to_bottom,#FAF6EE,#FAF6EE)]"
+>
       <Container>
         {/* ════════════════════════════════════════════
              HERO HEADLINE
