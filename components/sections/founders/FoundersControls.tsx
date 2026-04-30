@@ -63,7 +63,7 @@ export default function FoundersControls({
                   i === activeIndex ? "text-cream/60" : "text-ink-soft"
                 }`}
               >
-                {owner.role.split("&")[1]?.trim() || "Co-Founder"}
+                {owner.role}
               </div>
             </div>
           </button>

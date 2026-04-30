@@ -103,7 +103,8 @@ export default function ContactInfo() {
           value="+1 (201) 632-5548"
         />
         <ContactLink
-          href="#"
+          href="https://calendar.app.google/k6ccyzvEJWGNjxnH6"
+          external
           icon={<Calendar className="w-5 h-5 text-navy" strokeWidth={2.25} />}
           label="Book a free call"
           value="30-min strategy session"
@@ -129,6 +130,7 @@ type ContactLinkProps = {
   label: string;
   value: string;
   variant?: "light" | "dark";
+  external?: boolean;
 };
 
 function ContactLink({
@@ -137,11 +139,14 @@ function ContactLink({
   label,
   value,
   variant = "light",
+  external = false,
 }: ContactLinkProps) {
   const isDark = variant === "dark";
   return (
     <a
       href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className={
         isDark
           ? "group flex items-center gap-4 bg-navy text-cream rounded-2xl p-4 hover:bg-ink transition-colors"
