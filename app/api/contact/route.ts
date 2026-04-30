@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import {
   validateContactForm,
   type ContactFormData,
 } from "@/components/sections/contact/types";
 
 export const runtime = "nodejs";
+export const maxDuration = 30;
 
 export async function POST(req: Request) {
   const baseUrl = process.env.MAUTIC_BASE_URL;
@@ -50,40 +51,30 @@ export async function POST(req: Request) {
 
   const submitUrl = `${baseUrl.replace(/\/$/, "")}/form/submit?formId=${formId}`;
 
-  try {
-    const res = await fetch(submitUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: "text/html,application/json",
-      },
-      body,
-      redirect: "manual",
-    });
-
-    const text = await res.text().catch(() => "");
-    console.log("[mautic] →", submitUrl);
-    console.log("[mautic] payload keys:", Array.from(body.keys()));
-    console.log("[mautic] status:", res.status);
-    console.log(
-      "[mautic] location:",
-      res.headers.get("location") ?? "(none)",
-    );
-    console.log("[mautic] body (first 500):", text.slice(0, 500));
-
-    if (res.status >= 500) {
-      return NextResponse.json(
-        { ok: false, error: "mautic_failed" },
-        { status: 502 },
+  // Submit to Mautic AFTER we respond to the client.
+  // Why: Mautic's form submit can take 5–10s, which exceeds Vercel's 10s
+  // hobby timeout. The contact is created reliably; we don't need to block
+  // the user on a confirmation we already validated client-side.
+  after(async () => {
+    try {
+      const res = await fetch(submitUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: "text/html,application/json",
+        },
+        body,
+        redirect: "manual",
+      });
+      console.log("[mautic] status:", res.status);
+      console.log(
+        "[mautic] location:",
+        res.headers.get("location") ?? "(none)",
       );
+    } catch (err) {
+      console.error("[mautic] request failed", err);
     }
+  });
 
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("[mautic] request failed", err);
-    return NextResponse.json(
-      { ok: false, error: "network_error" },
-      { status: 502 },
-    );
-  }
+  return NextResponse.json({ ok: true });
 }
